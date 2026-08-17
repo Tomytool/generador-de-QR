@@ -1,27 +1,221 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Genera y descarga tus códigos QR de manera rápida, moderna y gratuita en formato PNG."
+    />
+    <title>Generador QR - Rápido y Moderno</title>
+
+    <!-- Google Fonts: Inter y Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Hojas de Estilo -->
     <link rel="stylesheet" href="style.css" />
-    <title>Generador QR</title>
   </head>
   <body>
-    <div class="contenedor">
-      <form action="" method="get">
-        <h2>Ingrese texto</h2>
-        <input type="text" name="ingreso" id="ingreso" class="inputText" />
-        <button type="submit" id="generar" class="boton">Generar</button>
-      </form>
-      <div id="contenedorQR"></div>
+    <div class="app-background">
+      <div class="bg-glow bg-glow-1"></div>
+      <div class="bg-glow bg-glow-2"></div>
     </div>
+
+    <main class="main-container">
+      <header class="app-header">
+        <div class="brand-badge">
+          <svg
+            class="brand-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="3" y="3" width="7" height="7" rx="1.5" />
+            <rect x="14" y="3" width="7" height="7" rx="1.5" />
+            <rect x="14" y="14" width="7" height="7" rx="1.5" />
+            <rect x="3" y="14" width="7" height="7" rx="1.5" />
+          </svg>
+          <span>QR Generator</span>
+        </div>
+        <h1 class="app-title">Generador de Código QR</h1>
+        <p class="app-subtitle">
+          Crea, personaliza y descarga tus códigos QR con tu logo al instante.
+        </p>
+      </header>
+
+      <div class="card-generator">
+        <form id="formQR" class="qr-form" action="" method="get">
+          <!-- Campo principal: Texto o URL -->
+          <div class="input-group">
+            <label for="ingreso" class="input-label"
+              >Texto o URL a codificar</label
+            >
+            <div class="input-wrapper">
+              <svg
+                class="input-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+                />
+                <path
+                  d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+                />
+              </svg>
+              <input
+                type="text"
+                name="ingreso"
+                id="ingreso"
+                class="inputText"
+                placeholder="https://ejemplo.com o tu texto aquí..."
+                autocomplete="off"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Opciones de Personalización de Colores y Logo -->
+          <details class="customize-accordion" open>
+            <summary class="customize-summary">
+              <span class="summary-title">
+                <svg class="summary-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 2a7 7 0 1 0 10 10" />
+                </svg>
+                Personalizar Colores y Logo
+              </span>
+              <svg class="summary-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </summary>
+
+            <div class="customize-content">
+              <!-- Selectores de Color -->
+              <div class="color-pickers-row">
+                <div class="color-picker-item">
+                  <label for="colorDark" class="picker-label">Color del QR</label>
+                  <div class="color-input-wrapper">
+                    <input type="color" id="colorDark" value="#0f172a" class="color-picker-input" />
+                    <span id="colorDarkHex" class="color-hex-badge">#0F172A</span>
+                  </div>
+                </div>
+
+                <div class="color-picker-item">
+                  <label for="colorLight" class="picker-label">Fondo del QR</label>
+                  <div class="color-input-wrapper">
+                    <input type="color" id="colorLight" value="#ffffff" class="color-picker-input" />
+                    <span id="colorLightHex" class="color-hex-badge">#FFFFFF</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Selector de Imagen / Logo Central -->
+              <div class="logo-upload-group">
+                <label class="picker-label">Logo Central (Opcional)</label>
+                <div class="file-upload-box">
+                  <input type="file" id="logoInput" accept="image/*" class="file-input-hidden" />
+                  <label for="logoInput" class="file-upload-trigger">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                      <circle cx="8.5" cy="8.5" r="1.5" />
+                      <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                    <span id="uploadText">Subir imagen o logo</span>
+                  </label>
+                  
+                  <div id="logoPreviewArea" class="logo-preview-area" style="display: none;">
+                    <img id="logoPreviewImg" src="" alt="Vista previa del logo" />
+                    <button type="button" id="removeLogoBtn" class="btn-remove-logo" title="Quitar logo">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <button type="submit" id="generar" class="btn btn-primary">
+            <svg
+              class="btn-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
+              />
+            </svg>
+            <span>Generar Código QR</span>
+          </button>
+        </form>
+
+        <div id="feedbackMsg" class="feedback-msg" aria-live="polite"></div>
+
+        <section class="qr-result-section">
+          <div class="qr-preview-card">
+            <div id="placeholderQR" class="qr-placeholder">
+              <svg
+                class="placeholder-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z" />
+                <path
+                  d="M14 14h2v2h-2zM18 14h2v2h-2zM14 18h2v2h-2zM18 18h2v2h-2z"
+                />
+              </svg>
+              <p>Tu código QR aparecerá aquí</p>
+            </div>
+            <div id="contenedorQR" class="contenedor-qr"></div>
+          </div>
+
+          <button type="button" id="descargar" class="btn btn-accent" disabled>
+            <svg
+              class="btn-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            <span>Descargar en PNG</span>
+          </button>
+        </section>
+      </div>
+
+      <footer class="app-footer">
+        <p>© 2026 QR Generator — Diseñado por Tomytool.</p>
+      </footer>
+    </main>
+
+    <!-- QRCodeJS Library -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
       integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="index.js"></script>
+
+    <!-- Main JavaScript ES Module -->
+    <script type="module" src="index.js"></script>
   </body>
 </html>
