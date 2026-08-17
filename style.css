@@ -33,7 +33,9 @@
   /* Sombras y Elevación */
   --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.04);
   --shadow-md: 0 8px 16px -4px rgba(15, 23, 42, 0.08);
-  --shadow-lg: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  --shadow-lg:
+    0 20px 25px -5px rgba(15, 23, 42, 0.1),
+    0 8px 10px -6px rgba(15, 23, 42, 0.04);
   --shadow-glow: 0 0 25px rgba(3, 166, 150, 0.18);
 
   /* Radios de borde */
@@ -43,8 +45,10 @@
   --radius-full: 9999px;
 
   /* Fuentes */
-  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading:
+    "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 /* ==========================================================================
@@ -99,7 +103,11 @@ body {
   transform: translateX(-50%);
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, var(--color-primary-glow) 0%, rgba(3, 166, 150, 0) 70%);
+  background: radial-gradient(
+    circle,
+    var(--color-primary-glow) 0%,
+    rgba(3, 166, 150, 0) 70%
+  );
 }
 
 .bg-glow-2 {
@@ -107,7 +115,11 @@ body {
   right: 10%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, var(--color-accent-glow) 0%, rgba(255, 126, 95, 0) 70%);
+  background: radial-gradient(
+    circle,
+    var(--color-accent-glow) 0%,
+    rgba(255, 126, 95, 0) 70%
+  );
 }
 
 /* ==========================================================================
@@ -618,7 +630,7 @@ body {
 .contenedor-qr img {
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-md);
-  padding: 10px;
+  padding: 20px;
   background-color: #ffffff;
   max-width: 100%;
   height: auto;
